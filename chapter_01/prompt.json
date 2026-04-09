@@ -1,0 +1,18 @@
+{
+  "_type": "chat",
+  "prompt": "",
+  "messages": [
+    {
+      "role": "system",
+      "content": "回答用户问题，按照以下形式做输出：{output_format}"
+    },
+    {
+      "role": "user",
+      "content": "{user_input}"
+    }
+  ],
+  "input_variables": [
+    "output_format",
+    "user_input"
+  ]
+}

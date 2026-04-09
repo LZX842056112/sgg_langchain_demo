@@ -1,0 +1,28 @@
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "animal_list",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "animals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "animal": {
+                "type": "string"
+              },
+              "emoji": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "animals"
+      ]
+    }
+  }
+}

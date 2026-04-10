@@ -7,13 +7,13 @@ dotenv.load_dotenv()
 #     model="openai/gpt-oss-20b:free",
 #     model_provider="openai",
 #     base_url="https://openrouter.ai/api/v1",
-#     api_key="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",
+#     api_key="sk-or-v1-",
 # )
 llm = init_chat_model(
     model="gpt-4o-mini",
     model_provider="openai",
     # base_url="https://openrouter.ai/api/v1",
-    # api_key="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",
+    # api_key="sk-or-v1-",
 )
 
 schema = {

@@ -5,7 +5,7 @@ import dotenv
 
 dotenv.load_dotenv()
 
-## 获取到客户端对象
+# 实例化向量数据库客户端
 client = MilvusClient(
     # uri="mivus_demo.db"
     uri=os.getenv("ZILLIZ_ENDPOINT"),
@@ -28,7 +28,7 @@ def create_collection():
         index_params = MilvusClient.prepare_index_params()
         # 通过调用索引参数的add_index方法，为collection当中定义的字段去构建索引
         index_params.add_index(
-            field_name="vector",
+            field_name="vector",  # 建立索引的字段
             index_type="AUTOINDEX",  # milvus自动根据当前数据量大小选择合适的索引,
             metric_type="COSINE"  # 衡量两个向量之间距离的方式，L2表示的是向量之间的欧式距离
         )
@@ -41,6 +41,7 @@ def create_collection():
                              index_params=build_index())
 
 
+# 加载文档
 def get_document():
     """
     准备Document，将Document交给embedding model 来进行嵌入
@@ -54,6 +55,7 @@ def get_document():
     return data_loader.load()
 
 
+# 加载嵌入模型
 def get_embeddings(document_list):
     """
     通过嵌入模型来得到向量
@@ -64,6 +66,7 @@ def get_embeddings(document_list):
     model = HuggingFaceEmbeddings(
         model_name=r"D:\cache\modelscope\hub/models\Xorbits\bge-base-zh-v1___5"
     )
+    # 计算嵌入向量
     return model.embed_documents(document_list)
 
 
@@ -71,6 +74,7 @@ def get_embeddings(document_list):
 def get_data_to_insert_into_milvus():
     documents = get_document()
     document_embeddings = get_embeddings([document.page_content for document in documents])
+    # 转换数据格式
     list_dict = [
         {
             "vector": document_embedding,

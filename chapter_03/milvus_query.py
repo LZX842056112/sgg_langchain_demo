@@ -5,6 +5,7 @@ import dotenv
 
 dotenv.load_dotenv()
 
+# 实例化向量数据库客户端
 client = MilvusClient(
     uri=os.getenv("ZILLIZ_ENDPOINT"),
     token=os.getenv("ZILLIZ_API_KEY")
@@ -17,7 +18,9 @@ def query() -> list[dict]:
     :param user_query:
     :return:
     """
+    # 通过过滤条件(https://milvus.io/docs/zh/boolean.md)查询实体
     res = client.query(collection_name="demo_collection",
+                       # 使用 metadata["source"] 进行过滤
                        filter='metadata["source"] == "assets/sample.docx"',
                        # 根据collection当中定义的其他字段信息（非向量字段）进行筛选
                        output_fields=["content"],
